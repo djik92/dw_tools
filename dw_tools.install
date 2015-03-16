@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * Implement hook_enable()
+ * Lors de l'activation de DW_tools on active admin_menu, module_filter et devel et on desactive overlay et toolbar
+ * @author djik
+ * @return NULL
+ */
+function dw_tools_enable() {
+
+	
+	module_disable(array('overlay','toolbar'),TRUE);
+	
+	// Create a custom menu, if Menu module is enabled.
+	if (module_exists('menu')) {
+		$menu = array(
+				'menu_name' 	=> 'djikweb',
+				'title' 		=> t('Djikweb'),
+				'description' 	=> t('Lien utile pour développer'),
+		);
+		menu_save($menu);
+		
+		$menu = array(
+				'menu_name' 	=> 'djikweb_admin',
+				'title' 		=> t('Djikweb Admin'),
+				'description' 	=> t('Anistration du module Dw Tools'),
+		);
+		menu_save($menu);
+	}
+}
+
+/**
+ * Implement hook_unistall()
+ * @author djik
+ * @return NULL
+ * 
+ */
+function dw_tools_unistall(){
+	
+	variable_del('djikweb_variables');
+	variable_del('djikweb_track_editor');
+	
+} 
+
+
+/**
+ * Implement hook_install()
+ * Implement hook_update_num()
+ * 
+ */
+
+/**
+ * Implement hook_disable()
+ * Désactivation du module Dw_tools
+ * @author djik
+ * @return NULL
+ */
+function dw_tools_disable(){
+	if (module_exists('menu')) {
+		if ($devel_menu = menu_load('djikweb')) {
+			menu_delete($devel_menu);
+		}
+		if ($devel_menu = menu_load('djikweb_admin')) {
+			menu_delete($devel_menu);
+		}
+	}
+	
+}
