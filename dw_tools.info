@@ -1,0 +1,12 @@
+name = DW Tools
+package = Djikweb
+description = module avec des outils pour le developpement et l'affichage
+core = 7.x
+
+dependencies[] = devel
+dependencies[] = admin_menu
+dependencies[] = module_filter
+
+files[] = dw_tools.install
+files[] = dw_tools.module
+files[] = dw_tools.drush.inc
