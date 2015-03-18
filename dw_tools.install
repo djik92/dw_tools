@@ -9,21 +9,21 @@
 function dw_tools_enable() {
 
 	
-	module_disable(array('overlay','toolbar'),TRUE);
+	//module_disable(array('overlay','toolbar'),TRUE);
 	
 	// Create a custom menu, if Menu module is enabled.
 	if (module_exists('menu')) {
 		$menu = array(
 				'menu_name' 	=> 'djikweb',
 				'title' 		=> t('Djikweb'),
-				'description' 	=> t('Lien utile pour développer'),
+				'description' 	=> t('Develop relevant link'),
 		);
 		menu_save($menu);
 		
 		$menu = array(
 				'menu_name' 	=> 'djikweb_admin',
 				'title' 		=> t('Djikweb Admin'),
-				'description' 	=> t('Anistration du module Dw Tools'),
+				'description' 	=> t('Dw Tools Administration Module'),
 		);
 		menu_save($menu);
 	}

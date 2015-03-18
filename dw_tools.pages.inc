@@ -84,11 +84,11 @@ function djikweb_admin_configuration_form($form, &$form_state) {
 	
 	$form['varibles'] = array(
 			'#type' 			=> 'radios',
-			'#title' 			=> t('Affichage des variables'),
+			'#title' 			=> t('Variables Display'),
 			'#default_value' 	=> 1,
 			'#options' 			=> array( 
-								0 	=> t('non'), 
-								1 	=> t('oui'),
+								0 	=> t('No'), 
+								1 	=> t('Yes'),
 								),
 			'#required' 		=> TRUE,
 	);
@@ -137,21 +137,21 @@ function dw_tools_configuration($form, &$form_state) {
 
 	$form['display_track_1'] = array(
 			'#type' 			=> 'radios',
-			'#title' 			=> t('Affichage des variables de Tracking'),
+			'#title' 			=> t('Variable Display Tracking'),
 			'#default_value' 	=> _get_default_value(variable_get('djikweb_variables')),
 			'#options' 			=> array(
-					0 	=> t('non'),
-					1 	=> t('oui'),
+					0 	=> t('No'),
+					1 	=> t('Oui'),
 			),
 			'#required' 		=> TRUE,
 	);
 	
 	$form['display_track_2'] = array(
 			'#type' 			=> 'radios',
-			'#title' 			=> t('Choix de l\'affichage'),
+			'#title' 			=> t('Display choice'),
 			'#default_value' 	=> _get_default_value(variable_get('djikweb_track_editor')),
 			'#options' 			=> array(
-					0 	=> t('Texte'),
+					0 	=> t('Text'),
 					1 	=> t('Dpm'),
 			),
 			'#required' 		=> FALSE,
@@ -159,7 +159,7 @@ function dw_tools_configuration($form, &$form_state) {
 
 	$form['submit_button'] = array(
 			'#type' => 'submit',
-			'#value' => t('Valider'),
+			'#value' => t('Check'),
 	);
 
 	return $form;

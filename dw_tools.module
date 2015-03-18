@@ -12,8 +12,8 @@ function dw_tools_menu() {
 	variable_set('djikweb_variables','0');	
 	
 	$items['djikweb/testing/page'] = array(
-  		'title' 				=> t('Page vierge'),
-  		'description' 			=> '',
+  		'title' 				=> t('Blank page'),
+  		'description' 			=> t('Blank page to test methods'),
     	'page callback' 		=> 'dw_tools_testing_page',
     	'access arguments' 		=> array('administer content types'),
   		'file' 					=> 'dw_tools.pages.inc',
@@ -22,7 +22,7 @@ function dw_tools_menu() {
   	);
 	
 	$items['djikweb/devel/cache/clear'] = array(
-		'title' 				=> 'Clear cache',
+		'title' 				=> t('Clear cache'),
 		'page callback' 		=> 'devel_cache_clear',
 		'description' 			=> '',
 		'access arguments' 		=> array('access devel information'),
@@ -43,8 +43,8 @@ function dw_tools_menu() {
 	);
 	*/
 	$items['djikweb/devel/php'] = array(
-		'title' 				=> 'Execute PHP Code',
-		'description' 			=> 'Execute some PHP code',
+		'title' 				=> t('Execute PHP Code'),
+		'description' 			=> t('Execute some PHP code'),
 		'page callback' 		=> 'drupal_get_form',
 		'page arguments' 		=> array('devel_execute_form'),
 		'access arguments' 		=> array('execute php code'),
@@ -64,8 +64,8 @@ function dw_tools_menu() {
 	);*/
 	
 	$items['djikweb/devel/phpinfo'] = array(
-		'title' 				=> 'PHPinfo()',
-		'description' 			=> 'View your server\'s PHP configuration',
+		'title' 				=> t('PHPinfo'),
+		'description' 			=> t('View your server\'s PHP configuration'),
 		'page callback' 		=> 'devel_phpinfo',
 		'access arguments' 		=> array('access devel information'),
 		'file' 					=> 'devel.pages.inc',
@@ -104,7 +104,7 @@ function dw_tools_menu() {
 	
   
  	$items['djikweb/generate/install/mysql'] = array( 
-  		'title' 				=> t('Générateur de script de creation de BDD'),
+  		'title' 				=> t('Creation script generator of database'),
   		'description' 			=> '',
   		'page callback' 		=> 'drupal_get_form', 
   		'page arguments' 		=> array('dw_tools_generate_install_mysql'), 
@@ -116,7 +116,8 @@ function dw_tools_menu() {
   	//ADMIN
   
   	$items['djikweb/configuration/configuration'] = array(
-  		'title' 				=> t('Afficher le type et l\'id des noeuds'),
+  		'title' 				=> t('View Specs nodes'),
+  	    'description'           => '',
   		'page callback' 		=> 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
   		'page arguments' 		=> array('dw_tools_configuration'), //put the name of the form here
   		'file' 					=> 'dw_tools.pages.inc',
@@ -154,7 +155,7 @@ function dw_tools_generate_install_mysql($form, &$form_state) {
 	
 	$form['field_bdd'] = array(
 		'#type' 				=> 'textfield',
-		'#title' 				=> t('Nom BDD'),
+		'#title' 				=> t('Database Name'),
 		'#default_value' 		=> '',
 		'#size' 				=> 60,
 		'#maxlength' 			=> 128,
@@ -194,18 +195,18 @@ function dw_tools_generate_install_mysql($form, &$form_state) {
 	
 	$form['del_bdd'] = array(
 			'#type' 			=> 'radios',
-			'#title' 			=> t('Supprimer la BBD si elle existe'),
+			'#title' 			=> t('You want to remove the database (if exists) ?'),
 			'#default_value' 	=> 0,
 			'#options' 			=> array(
-					0 	=> t('non'),
-					1 	=> t('oui'),
+					0 	=> t('No'),
+					1 	=> t('Yes'),
 			),
 			'#required' 		=> TRUE,
 	);
 	
 	$form['submit_button'] = array(
 		'#type' 				=> 'submit',
-		'#value' 				=> t('Valider'),
+		'#value' 				=> t('Check'),
 	);
 	
 	

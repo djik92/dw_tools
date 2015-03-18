@@ -1,6 +1,6 @@
 name = DW Tools
 package = Djikweb
-description = module avec des outils pour le developpement et l'affichage
+description = Module with tools for the development and display
 core = 7.x
 
 dependencies[] = devel
