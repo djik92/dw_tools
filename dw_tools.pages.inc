@@ -141,7 +141,7 @@ function dw_tools_configuration($form, &$form_state) {
 			'#default_value' 	=> _get_default_value(variable_get('djikweb_variables')),
 			'#options' 			=> array(
 					0 	=> t('No'),
-					1 	=> t('Oui'),
+					1 	=> t('Yes'),
 			),
 			'#required' 		=> TRUE,
 	);
