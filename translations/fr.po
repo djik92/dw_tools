@@ -3,6 +3,7 @@
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
+#  dw_tools.drush.inc: n/a
 #  dw_tools.pages.inc: n/a
 #  dw_tools.module: n/a
 #  dw_tools.install: n/a
@@ -11,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-03-18 16:30+0100\n"
-"PO-Revision-Date: 2015-03-18 16:32+0100\n"
+"POT-Creation-Date: 2015-03-19 15:50+0100\n"
+"PO-Revision-Date: 2015-03-19 15:53+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -23,15 +24,31 @@ msgstr ""
 "X-Generator: Poedit 1.7.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
+#: dw_tools.drush.inc:38
+msgid "Prefixed 'field_deleted_data_' tables are deleted"
+msgstr "Les tables préfixées  'field_deleted_data_' sont supprimer"
+
+#: dw_tools.drush.inc:50
+msgid "Prefixed 'field_deleted_revision_' tables are deleted"
+msgstr "Les tables préfixées  'field_deleted_revision_' sont supprimer"
+
+#: dw_tools.drush.inc:58
+msgid "The lines of the table 'field_config' where  deleted = 1 was deleted"
+msgstr "Les lignes de la table 'field_config' où deleted=1 sont supprimées"
+
+#: dw_tools.drush.inc:65
+msgid "The lines of the table 'field_config_instance' where  deleted = 1 was deleted"
+msgstr "Les lignes de la table 'field_config_instance' où deleted=1 sont supprimées"
+
 #: dw_tools.pages.inc:87
 msgid "Variables Display"
-msgstr "Variables Affichage"
+msgstr "Afficher les variables"
 
-#: dw_tools.pages.inc:90;143 dw_tools.module:201
+#: dw_tools.pages.inc:90;144 dw_tools.module:201
 msgid "No"
 msgstr "Non"
 
-#: dw_tools.pages.inc:91;144 dw_tools.module:202
+#: dw_tools.pages.inc:91;145 dw_tools.module:202
 msgid "Yes"
 msgstr "Oui"
 
@@ -39,23 +56,23 @@ msgstr "Oui"
 msgid "Save configuration"
 msgstr "Sauvegarder la configuration"
 
-#: dw_tools.pages.inc:140
+#: dw_tools.pages.inc:141
 msgid "Variable Display Tracking"
-msgstr "Affichage des varibles de tracking"
+msgstr "Affichage les varibles de tracking"
 
-#: dw_tools.pages.inc:151
+#: dw_tools.pages.inc:152
 msgid "Display choice"
 msgstr "Choix d'affichage"
 
-#: dw_tools.pages.inc:154
+#: dw_tools.pages.inc:155
 msgid "Text"
 msgstr "Texte"
 
-#: dw_tools.pages.inc:155
+#: dw_tools.pages.inc:156
 msgid "Dpm"
 msgstr "Dpm"
 
-#: dw_tools.pages.inc:162 dw_tools.module:209
+#: dw_tools.pages.inc:163 dw_tools.module:209
 msgid "Check"
 msgstr "Valider"
 
@@ -65,7 +82,7 @@ msgstr "Page vierge"
 
 #: dw_tools.module:16
 msgid "Blank page to test methods"
-msgstr "Page vierge pour tester des méthodes"
+msgstr "Page vierge pour tester les méthodes"
 
 #: dw_tools.module:25
 msgid "Clear cache"
@@ -133,4 +150,4 @@ msgstr "DW Tools"
 
 #: dw_tools.info:0
 msgid "Module with tools for the development and display"
-msgstr "Module with tools for the development and display"
+msgstr "Outils pour le développement et l'affichage"

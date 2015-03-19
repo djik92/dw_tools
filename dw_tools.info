@@ -10,3 +10,6 @@ dependencies[] = module_filter
 files[] = dw_tools.install
 files[] = dw_tools.module
 files[] = dw_tools.drush.inc
+
+
+version = "7.x-1.0"

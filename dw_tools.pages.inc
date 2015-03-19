@@ -107,8 +107,9 @@ function djikweb_admin_configuration_form($form, &$form_state) {
  * @return string
  */
 function dw_tools_testing_page() {
-
-	
+  
+  
+  
 	return 'page djikweb/testing/page';
 }
 
