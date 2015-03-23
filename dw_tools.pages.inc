@@ -108,8 +108,8 @@ function djikweb_admin_configuration_form($form, &$form_state) {
  */
 function dw_tools_testing_page() {
   
-  
-  
+  print_nice(system_get_info('module'),10);
+ 
 	return 'page djikweb/testing/page';
 }
 
@@ -180,4 +180,11 @@ function dw_tools_configuration_submit($form, &$form_state) {
 	} else {
 		variable_set('djikweb_track_editor','0');
 	}
+}
+
+
+
+function dw_tools_test($var){
+  return $var;
+  
 }

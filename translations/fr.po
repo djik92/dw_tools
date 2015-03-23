@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2015-03-19 15:50+0100\n"
-"PO-Revision-Date: 2015-03-19 15:53+0100\n"
+"PO-Revision-Date: 2015-03-19 16:00+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -26,19 +26,19 @@ msgstr ""
 
 #: dw_tools.drush.inc:38
 msgid "Prefixed 'field_deleted_data_' tables are deleted"
-msgstr "Les tables préfixées  'field_deleted_data_' sont supprimer"
+msgstr "Les tables prefixees 'field_deleted_data_' sont supprimees"
 
 #: dw_tools.drush.inc:50
 msgid "Prefixed 'field_deleted_revision_' tables are deleted"
-msgstr "Les tables préfixées  'field_deleted_revision_' sont supprimer"
+msgstr "Les tables prefixees  'field_deleted_revision_' sont supprimees"
 
 #: dw_tools.drush.inc:58
 msgid "The lines of the table 'field_config' where  deleted = 1 was deleted"
-msgstr "Les lignes de la table 'field_config' où deleted=1 sont supprimées"
+msgstr "Les lignes de la table 'field_config' ou deleted=1 sont supprimees"
 
 #: dw_tools.drush.inc:65
 msgid "The lines of the table 'field_config_instance' where  deleted = 1 was deleted"
-msgstr "Les lignes de la table 'field_config_instance' où deleted=1 sont supprimées"
+msgstr "Les lignes de la table 'field_config_instance' ou deleted=1 sont supprimees"
 
 #: dw_tools.pages.inc:87
 msgid "Variables Display"

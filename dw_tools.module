@@ -237,6 +237,7 @@ function dw_tools_generate_install_mysql_submit($form, &$form_state) {
 		$txt .= 'FLUSH PRIVILEGES;'."\n";
 	}
 	
+	drupal_set_message($txt, 'status', FALSE);
 	dsm($txt);
 }
 
@@ -270,5 +271,14 @@ function dw_tools_preprocess(&$variables, $hook){
 
 
 
-
+function dw_tools_help($path, $arg){
+  switch ($path) {
+    case 'admin/help#dw_tools':
+      return 'test';
+    case 'djikweb/generate/install/mysql':
+      return '<p style="background-color:#FFFF80;">' . t('test.') . '</p>';
+      
+  }
+      
+}
 
