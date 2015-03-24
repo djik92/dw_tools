@@ -4,12 +4,12 @@ description = Module with tools for the development and display
 core = 7.x
 
 dependencies[] = devel
-dependencies[] = admin_menu
-dependencies[] = module_filter
+
 
 files[] = dw_tools.install
 files[] = dw_tools.module
 files[] = dw_tools.drush.inc
+files[] = dw_tools.test
 
 
 version = "7.x-1.0"

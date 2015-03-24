@@ -1,0 +1,69 @@
+<?php 
+
+
+class DwToolsTestCase extends DrupalWebTestCase {
+
+  protected $privileged_user;
+  protected $not_privileged_user;
+
+
+  public static function getInfo(){
+
+    return array (
+        'name'        => t('DW TOOLS TEST'),
+        'description' => t('Unit test set for the module'),
+        'group'       => 'djikweb',
+    );
+  }
+
+  function setUp(){
+    parent::setUp(array ('dw_tools'));
+
+  
+  }
+  
+  
+
+
+  function testInit(){
+     
+    $modules = system_rebuild_module_data();
+    $object = is_object($modules['studialis_configuration']);
+     
+    $this->assertTrue($object,t('This module is identified by drupal.'),$group='Test');
+     
+  }
+   
+  function testStart(){
+     
+    module_enable(array('dw_tools'));
+    $modules = system_rebuild_module_data();
+    $module = $modules['dw_tools'];
+     
+    $this->assertEqual(1,$module->status,t('This module is enabled by drupal.'),$group='Test');
+     
+    $this->assertNotEqual('-1',$module->schema_version,t('This module is installed by drupal.'),$group='Test');
+     
+  }
+   
+  function testStop(){
+    module_disable(array('dw_tools'));
+    $modules = system_rebuild_module_data();
+    $module = $modules['dw_tools'];
+     
+    $this->assertEqual(0,$module->status,t('This module is disabled by drupal.'),$group='Test');
+     
+    $uninstall  = drupal_uninstall_modules(array('dw_tools'));
+    $modules = system_rebuild_module_data();
+
+
+    $this->assertEqual(TRUE,$uninstall,t('This module is uninstalled by drupal.'),$group='Test');
+    $modules = system_rebuild_module_data();
+    $module = $modules['dw_tools'];
+     
+    
+  }
+   
+   
+
+}
