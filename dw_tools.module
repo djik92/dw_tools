@@ -128,8 +128,25 @@ function dw_tools_menu() {
   	return $items;
 }
 
-function dw_tools_menu_alter(&$items){
+/*function dw_tools_menu_alter(&$items){
+  
 	$items['djikweb/devel/phpinfo']['access callback'] = FALSE;
+}*/
+
+
+/**
+ * Comment cacher des liens du menu ?
+ * @author djik
+ * @param unknown $item
+ * @param unknown $menu
+ */
+function dw_tools_menu_link_alter(&$item, $menu){
+  
+if ($item['link_path'] == 'djikweb/devel/phpinfo') {
+    $item['hidden'] = 0;
+  };
+  
+  
 }
 
 function dw_tools_generate_install_mysql($form, &$form_state) {

@@ -109,7 +109,6 @@ function djikweb_admin_configuration_form($form, &$form_state) {
 function dw_tools_testing_page() {
   
  
-  print_nice(system_rebuild_module_data(),10);
 	return 'page djikweb/testing/page';
 }
 
