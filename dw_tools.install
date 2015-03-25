@@ -9,7 +9,8 @@
 function dw_tools_enable() {
 
 	
-	//module_disable(array('overlay','toolbar'),TRUE);
+	module_disable(array('overlay','toolbar'),TRUE);
+	
 	
 	// Create a custom menu, if Menu module is enabled.
 	if (module_exists('menu')) {

@@ -1,0 +1,36 @@
+/*****************************
+** Liste des test unitaires **
+*****************************/
+
+
+> Test n°1 : Vérifie qu'un utilisateur avec les bon droits a accès au lien du menu
+
+> Test n°2 : Vérifie qu'un utilisateur sans les bon droits n'a pas accès au lien du menu
+
+> Test n°3 : Vérifie que drupal reconnait le module
+
+> Test n°4 : Vérifie que le module est activable
+
+> Test n°5 : Vérifie que le module est installable
+
+> Test n°6 : Vérifie que le module est désactivable
+
+> Test n°7 : Vérifie que le module est désinstallable
+
+> Test n°8 : Vérifie que les variables sont supprimer après désinstallation du module
+
+> Test n°9 : Vérifier que la mise a jour est effective
+
+> Test n°10 : Vérifier que les tables sont créées à l'installation du module.
+
+> Test n°11 : Vérifier que les tables sont supprimées à la désinstallation du module.
+
+> Test n°12 : Vérifier que les permissions on été supprimées.
+
+> Test n°13 : Vérifier que l'on n'a pas de menu help pour le module.
+
+> Test n°14 : Vérifier qu'on ai un menu help pour le module.
+
+> Test n°15 : Vérifier que le module a les bonnes dépendances.
+
+> Test n°16 : Vérifier que le module à les bonnes version des modules dépendants.

@@ -108,8 +108,31 @@ function djikweb_admin_configuration_form($form, &$form_state) {
  */
 function dw_tools_testing_page() {
   
- 
+  $files = drupal_system_listing('/^' . DRUPAL_PHP_FUNCTION_PATTERN . '\.info$/', 'modules', 'name', 0);
+  $files = $files['dw_tools'];
+  print_nice($files->uri);
+  $info = file_get_contents($files->uri);
+  
+  
+  var_dump($info);
+  print_nice(stripos($info,'7.x-2.0-alpha2'));
+  
+  
+  
 	return 'page djikweb/testing/page';
+}
+
+/**
+ * Fonction qui permet de récupérer le contenu du fichier *.info
+ * @author djik
+ * @param  $module_name
+ * @return string
+ */
+function _get_file_info($module_name){
+  $files = drupal_system_listing('/^' . DRUPAL_PHP_FUNCTION_PATTERN . '\.info$/', 'modules', 'name', 0);
+  $files = $files[$module_name];
+  
+  return file_get_contents($files->uri);
 }
 
 function djikweb_admin_configuration_form_submit($form, &$form_state) {

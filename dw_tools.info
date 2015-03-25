@@ -4,6 +4,10 @@ description = Module with tools for the development and display
 core = 7.x
 
 dependencies[] = devel
+dependencies[] = module_filter
+dependencies[] = admin_menu
+
+
 
 
 files[] = dw_tools.install

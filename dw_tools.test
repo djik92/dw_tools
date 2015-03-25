@@ -24,44 +24,72 @@ class DwToolsTestCase extends DrupalWebTestCase {
   
   
 
-
+  /**
+   * Test n°3 : Vérifie que drupal reconnait le module
+   */
   function testInit(){
      
     $modules = system_rebuild_module_data();
     $object = is_object($modules['studialis_configuration']);
      
-    $this->assertTrue($object,t('This module is identified by drupal.'),$group='Test');
+    $this->assertTrue($object,t('This module is identified by drupal.'),$group='Test');//Test 3
      
   }
-   
+  
+  /**
+   * Test n°4 : Vérifie que le module est activable
+   * Test n°5 : Vérifie que le module est installable
+   */
   function testStart(){
      
-    module_enable(array('dw_tools'));
     $modules = system_rebuild_module_data();
     $module = $modules['dw_tools'];
      
-    $this->assertEqual(1,$module->status,t('This module is enabled by drupal.'),$group='Test');
+    $this->assertEqual(1,$module->status,t('This module is enabled by drupal.'),$group='Test');//Test 4
      
-    $this->assertNotEqual('-1',$module->schema_version,t('This module is installed by drupal.'),$group='Test');
+    $this->assertNotEqual('-1',$module->schema_version,t('This module is installed by drupal.'),$group='Test');//Test 5
      
   }
-   
+  
+  /**
+   * Test n°6 : Vérifie que le module est désactivable
+   * Test n°7 : Vérifie que le module est désinstallable
+   */
   function testStop(){
     module_disable(array('dw_tools'));
     $modules = system_rebuild_module_data();
     $module = $modules['dw_tools'];
      
-    $this->assertEqual(0,$module->status,t('This module is disabled by drupal.'),$group='Test');
+    $this->assertEqual(0,$module->status,t('This module is disabled by drupal.'),$group='Test');//Test 6
      
     $uninstall  = drupal_uninstall_modules(array('dw_tools'));
     $modules = system_rebuild_module_data();
 
 
-    $this->assertEqual(TRUE,$uninstall,t('This module is uninstalled by drupal.'),$group='Test');
+    $this->assertEqual(TRUE,$uninstall,t('This module is uninstalled by drupal.'),$group='Test');//Test 7
     $modules = system_rebuild_module_data();
     $module = $modules['dw_tools'];
      
     
+  }
+  
+  /**
+   * Test n°15 : Vérifier que le module a les bonnes dépendances.
+   * Test n°16 : Vérifier que le module à les bonnes version des modules dépendants.
+   */
+  function testDependencies() {
+   $info_this_module = _get_file_info('dw_tools');
+   $info_module_filter = _get_file_info('module_filter');
+  
+   
+   $this->assertNotEqual(FALSE, stripos($info_this_module,'devel'),t('Devel is a dependencies.'),$group='Test');//Test 15
+   $this->assertNotEqual(FALSE, stripos($info_this_module,'module_filter'),t('module_filter is a dependencies.'),$group='Test');//Test 15
+   $this->assertNotEqual(FALSE, stripos($info_this_module,'admin_menu'),t('admin_menu is a dependencies.'),$group='Test');//Test 15
+    
+   $this->assertNotEqual(FALSE, stripos($info_module_filter,'7.x-2.0-alpha2'),t('The correct version of module_filter installed.'),$group='Test');//Test 16
+  
+   
+   
   }
    
    
