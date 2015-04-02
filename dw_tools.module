@@ -1,5 +1,7 @@
 <?php
 require_once 'dw_tools.pages.inc';
+require_once 'dw_tools.lib.inc';
+require_once 'dw_tools.testing.inc';
 
 
 /**
