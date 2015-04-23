@@ -34,16 +34,27 @@ function dw_tools_menu() {
 		'weight'				=> 1,
 	);
 	
-	/*
-	$items['devel/entity/info'] = array(
-		'title' 				=> 'Entity info',
-		'description' 			=> 'View entity information across the whole site.',
-		'page callback' => 'devel_entity_info_page',
-		'access arguments' => array('access devel information'),
-		'file' => 'devel.pages.inc',
-		'menu_name' => 'devel',
+	$items['djikweb/generate/install/mysql'] = array(
+	  		'title' 				=> t('Creation script generator of database'),
+	  		'description' 			=> '',
+	  		'page callback' 		=> 'drupal_get_form',
+	  		'page arguments' 		=> array('dw_tools_generate_install_mysql'),
+	  		'access callback' 		=> TRUE,
+	  		'menu_name' 			=> 'djikweb_admin',
+	  		'weight'				=> 2,
 	);
-	*/
+	
+	$items['djikweb/generate/password'] = array(
+	    'title' 				=> t('Crypt a password'),
+	    'description' 			=> '',
+	    'page callback' 		=> 'drupal_get_form', 
+	    'page arguments' 		=> array('dw_tools_generate_password'),
+	    'access callback' 		=> TRUE,
+	    'menu_name' 			=> 'djikweb_admin',
+	    'weight'				=> 3,
+	);
+	
+
 	$items['djikweb/devel/php'] = array(
 		'title' 				=> t('Execute PHP Code'),
 		'description' 			=> t('Execute some PHP code'),
@@ -53,17 +64,9 @@ function dw_tools_menu() {
 		'file' 					=> 'devel.pages.inc',
 		'file path' 			=> drupal_get_path('module', 'devel'),
 		'menu_name' 			=> 'djikweb',
-		'weight'				=> 3,
+		'weight'				=> 4,
 	);
-	/*
-	$items['devel/field/info'] = array(
-			'title' => 'Field info',
-			'description' => 'View fields information across the whole site.',
-			'page callback' => 'devel_field_info_page',
-			'access arguments' => array('access devel information'),
-			'file' => 'devel.pages.inc',
-			'menu_name' => 'devel',
-	);*/
+
 	
 	$items['djikweb/devel/phpinfo'] = array(
 		'title' 				=> t('PHPinfo'),
@@ -75,45 +78,14 @@ function dw_tools_menu() {
 		'menu_name' 			=> 'djikweb',
 		'weight'				=> 5,
 	);
-	/*
-	$items['devel/session'] = array(
-			'title' => 'Session viewer',
-			'description' => 'List the contents of $_SESSION.',
-			'page callback' => 'devel_session',
-			'access arguments' => array('access devel information'),
-			'file' => 'devel.pages.inc',
-			'menu_name' => 'devel',
-	);
-	
-	$items['devel/switch'] = array(
-			'title' => 'Switch user',
-			'page callback' => 'devel_switch_user',
-			'access callback' => '_devel_switch_user_access',
-			'access arguments' => array(2),
-			'type' => MENU_CALLBACK,
-			'file' => 'devel.pages.inc',
-			'menu_name' => 'devel',
-	);
-	$items['devel/variable'] = array(
-			'title' => 'Variable editor',
-			'description' => 'Edit and delete site variables.',
-			'page callback' => 'drupal_get_form',
-			'page arguments' => array('devel_variable_form'),
-			'access arguments' => array('access devel information'),
-			'file' => 'devel.pages.inc',
-			'menu_name' => 'devel',
-	);*/
+
 	
   
- 	$items['djikweb/generate/install/mysql'] = array( 
-  		'title' 				=> t('Creation script generator of database'),
-  		'description' 			=> '',
-  		'page callback' 		=> 'drupal_get_form', 
-  		'page arguments' 		=> array('dw_tools_generate_install_mysql'), 
-  		'access callback' 		=> TRUE,
-  		'menu_name' 			=> 'djikweb_admin',
-  		'weight'				=> 2,
-  	);
+ 	
+ 	
+ 	
+ 	
+ 	
   
   	//ADMIN
   
@@ -126,6 +98,8 @@ function dw_tools_menu() {
   		'access callback' 		=> TRUE,
   		'menu_name' 			=> 'djikweb_admin',
   	);
+  	
+  	
      
   	return $items;
 }
@@ -259,6 +233,46 @@ function dw_tools_generate_install_mysql_submit($form, &$form_state) {
 	drupal_set_message($txt, 'status', FALSE);
 	dsm($txt);
 }
+
+
+function dw_tools_generate_password($form, &$form_state) {
+ 
+  $form['passwd'] = array(
+      '#type' 				=> 'textfield',
+      '#title' 				=> t('Password'),
+      '#default_value' 		=> '',
+      '#size' 				=> 60,
+      '#maxlength' 			=> 128,
+      '#required' 			=> TRUE,
+  
+  );
+  
+  $form['submit_button'] = array(
+      '#type' 				=> 'submit',
+      '#value' 				=> t('Check'),
+  );
+  
+  return $form;
+  
+}
+
+
+function dw_tools_generate_password_submit($form, &$form_state) {
+  
+
+
+  require_once getcwd().'/includes/password.inc';
+  require_once getcwd().'/includes/bootstrap.inc';
+ 
+  
+ $hash_pass =  user_hash_password($form_state['input']['passwd'],11);
+ drupal_set_message($hash_pass, 'status', FALSE);
+ 
+ $txt = 'UPDATE users SET pass='.$hash_pass.' WHERE uid=1;';
+ drupal_set_message($txt, 'status', FALSE);
+}
+
+
 
 /**
  * Implement hook_preprocess()

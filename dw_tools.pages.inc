@@ -126,6 +126,8 @@ function dw_tools_configuration($form, &$form_state) {
 
 
 function dw_tools_configuration_submit($form, &$form_state) {
+  
+
 
 	if($form_state['values']['display_track_1'] == '1'){
 		variable_set('djikweb_variables','1');

@@ -31,12 +31,12 @@ function dw_tools_enable() {
 }
 
 /**
- * Implement hook_unistall()
+ * Implement hook_uninstall()
  * @author djik
  * @return NULL
  * 
  */
-function dw_tools_unistall(){
+function dw_tools_uninstall(){
 	
 	variable_del('djikweb_variables');
 	variable_del('djikweb_track_editor');
