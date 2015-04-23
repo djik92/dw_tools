@@ -3,10 +3,11 @@ package = Djikweb
 description = Module with tools for the development and display
 core = 7.x
 
-version = 7.x-1.3
+version = 7.x-1.4
 
 dependencies[] = devel
 dependencies[] = module_filter
+dependencies[] = admin_menu
 
 
 
