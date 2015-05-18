@@ -7,7 +7,44 @@
  */
 function dw_tools_testing_page() {
 
+/*  
+  
 
+$ciid = db_select('commercial_item','ci')
+    ->fields('ci',array('ciid'))
+    ->condition('uuid','urn:bossanova:commercial_unit:08ff27bc-2ce4-4bac-a779-520a240c3afe','=')
+    ->execute()
+    ->fetchField();
+
+print_nice($ciids);*/
+ /*   $query = db_select('commercial_authority','ca')
+    ->fields('ca',array('title'))
+    ->condition('type','webform_zones','=')
+    ->condition('title',$sw->form_zonning_label,'=')
+    ->execute();
+  
+    if($query->rowCount() > 0){
+  
+      $label = db_select('commercial_authority','ca')
+      ->fields('ca',array('title'))
+      ->condition('type','webform_zones','=')
+      ->condition('code',$sw->form_zonning_label,'=')
+      ->execute()
+      ->fetchField();
+  
+      db_update('studialis_webform')
+      ->fields(array(
+          'form_zonning_uuid' => $sw->form_zonning_label,
+          'form_zonning_label' => $label,
+      ))
+      ->condition('nid',$sw->nid,'=')
+      ->execute();
+       
+    }
+  }*/
+  
+  
+  
 /*
 
 

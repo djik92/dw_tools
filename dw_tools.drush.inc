@@ -14,6 +14,13 @@ function dw_tools_drush_command() {
 			//'bootstrap' 		=> DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
 	);
 	
+	$items['dw-tools-truncate-table-cache'] = array(
+	    'description' 		=> dt('truncate table cache.'),
+	    'aliases' 			=> array('ccc'),
+
+	);
+	
+	
 	return $items;
 }
 
@@ -65,6 +72,20 @@ function drush_dw_tools_clear_table_deleted() {
   watchdog('drush', t('The lines of the table \'field_config_instance\' where  deleted = 1 was deleted'));
   drush_print_r(dt('The lines of the table \'field_config_instance\' where  deleted = 1 was deleted'));
   
+  
+}
+
+/**
+ * Fonction qui permet de supprimer tous les caches a la volée
+ */
+function drush_dw_tools_truncate_table_cache(){
+ 
+  $result = db_query("SELECT table_name AS statement FROM information_schema.tables WHERE table_name LIKE 'cache%'");
+  
+  foreach ($result as $table){
+    db_truncate($table->statement);
+    drush_log(dt('@tables tables are truncated.', array('@tables' => $table->statement)), 'success');
+  }
   
 }
 
