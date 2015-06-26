@@ -1,145 +1,143 @@
 <?php
-require_once 'dw_tools.lib.inc';
-require_once 'dw_tools.testing.inc';
-
-
-
 
 /**
- * Fonction qui permet de retourner le nodeid courant.
- * Si problème retourne FALSE
- * @return Ambigous <boolean, The>
+ * Form who allow to collect a new password
+ * @link djikweb/generate/password
+ * @param $form
+ * @param $form_state
+ * @return array
  */
-function _get_current_nodeid(){
-	$nodeid = FALSE;
-	if (arg(0) == 'node' && is_numeric(arg(1))){
-		$nodeid = arg(1);
-	}
-	return $nodeid; // show me your nid!
-}
+function dw_tools_generate_password($form, &$form_state) {
 
+  $form['passwd'] = array(
+      '#type' 				=> 'textfield',
+      '#title' 				=> t('Password'),
+      '#default_value' 		=> '',
+      '#size' 				=> 60,
+      '#maxlength' 			=> 128,
+      '#required' 			=> TRUE,
 
+  );
 
-function djikweb_admin_configuration_form($form, &$form_state) {
-	
-	$form['varibles'] = array(
-			'#type' 			=> 'radios',
-			'#title' 			=> t('Variables Display'),
-			'#default_value' 	=> 1,
-			'#options' 			=> array( 
-								0 	=> t('No'), 
-								1 	=> t('Yes'),
-								),
-			'#required' 		=> TRUE,
-	);
-	
-	$form['actions'] = array(
-			'#type' => 'submit',
-			'#value' => t('Save configuration'),
-	);
-	
-	return $form;
-}
+  $form['submit_button'] = array(
+      '#type' 				=> 'submit',
+      '#value' 				=> t('Check'),
+  );
 
+  return $form;
 
-
-
-
-function _test_link($ciid = NULL, $item = ''){
-  
-  if ($ciid != NULL) {
-  
-    $tree = db_select('commercial_item', 'c');
-    $tree->fields('c', array (
-        'parent_id',
-        'ciid',
-        'title'
-    ));
-    $tree->condition('c.ciid', $ciid, '=');
-    $tree = $tree->execute();
-  
-    while ( $res = $tree->fetchObject() ) {
-      $item = empty($item) ? $res->title : $res->title . ' > ' . $item;
-      if (isset($res->parent_id)) {
-  
-        return _test_link($res->parent_id, $item);
-      } else {
-        return $item;
-      }
-    }
-  }
-  return;
 }
 
 /**
- * Fonction qui permet de récupérer le contenu du fichier *.info
- * @author djik
- * @param  $module_name
+ * Form Submit who allow display Query SQL Update password
+ * @param $form
+ * @param $form_state
+ * @return NULL
+ */
+function dw_tools_generate_password_submit($form, &$form_state) {
+
+  require_once getcwd().'/includes/password.inc';
+  require_once getcwd().'/includes/bootstrap.inc';
+
+
+  $hash_pass =  user_hash_password($form_state['input']['passwd'],11);
+
+  $txt = 'UPDATE users SET pass=\''.$hash_pass.'\' WHERE uid=1;';
+  dsm($txt);
+}
+
+/**
+ * Allow to test a code
+ *
+ * @link admin/config/development/djikweb/page
  * @return string
  */
-function _get_file_info($module_name){
-  $files = drupal_system_listing('/^' . DRUPAL_PHP_FUNCTION_PATTERN . '\.info$/', 'modules', 'name', 0);
-  $files = $files[$module_name];
+function dw_tools_testing_page() {
   
-  return file_get_contents($files->uri);
+  /**
+   * Insert a code
+   */
+  return 'page Test';
 }
 
-function djikweb_admin_configuration_form_submit($form, &$form_state) {
-	//print_nice($form_state,10);
+/**
+ * Allow to create a script for create a Mysql Database
+ * @link djikweb/generate/install/mysql
+ * @param $form
+ * @param $form_state
+ * @return array
+ */
+function dw_tools_generate_install_mysql($form, &$form_state) {
+  $form['field_login'] = array(
+      '#type' 				=> 'textfield',
+      '#title' 				=> t('Login'),
+      '#default_value' 		=> '',
+      '#size' 				=> 60,
+      '#maxlength' 			=> 128,
+      '#required' 			=> TRUE,
+
+  );
+
+  $form['field_passwd'] = array(
+      '#type' 				=> 'password',
+      '#title' 				=> t('Password'),
+      '#maxlength' 			=> 64,
+      '#size' 				=> 30,
+      '#maxlength' 			=> 128,
+      '#required' 			=> FALSE,
+      	
+  );
+
+  $form['field_bdd'] = array(
+      '#type' 				=> 'textfield',
+      '#title' 				=> t('Database Name'),
+      '#default_value' 		=> '',
+      '#size' 				=> 60,
+      '#maxlength' 			=> 128,
+      '#required' 			=> TRUE,
+
+  );
+
+  $form['del_bdd'] = array(
+      '#type' 			=> 'radios',
+      '#title' 			=> t('You want to remove the database (if exists) ?'),
+      '#default_value' 	=> 0,
+      '#options' 			=> array(
+          0 	=> t('No'),
+          1 	=> t('Yes'),
+      ),
+      '#required' 		=> TRUE,
+  );
+
+  $form['submit_button'] = array(
+      '#type' 				=> 'submit',
+      '#value' 				=> t('Check'),
+  );
+
+  return $form;
 }
 
+/**
+ * Form submit to generate a script Mysql
+ * @param unknown $form
+ * @param unknown $form_state
+ * @return NULL
+ */
+function dw_tools_generate_install_mysql_submit($form, &$form_state) {
+ 
+  $txt = '';
 
+  if($form_state['input']['del_bdd']){
+    $txt .= 'DROP DATABASE IF EXISTS '.strtoupper($form_state['input']['field_bdd']).';'."\n";
+  }
+  $txt .= 'CREATE DATABASE IF NOT EXISTS '.strtoupper($form_state['input']['field_bdd']).';'."\n";
 
-
-// hook_form implementation
-function dw_tools_configuration($form, &$form_state) {
-
-	$form['display_track_1'] = array(
-			'#type' 			=> 'radios',
-			'#title' 			=> t('Variable Display Tracking'),
-			'#default_value' 	=> _get_default_value(variable_get('djikweb_variables')),
-			'#options' 			=> array(
-					0 	=> t('No'),
-					1 	=> t('Yes'),
-			),
-			'#required' 		=> TRUE,
-	);
-	
-	$form['display_track_2'] = array(
-			'#type' 			=> 'radios',
-			'#title' 			=> t('Display choice'),
-			'#default_value' 	=> _get_default_value(variable_get('djikweb_track_editor')),
-			'#options' 			=> array(
-					0 	=> t('Text'),
-					1 	=> t('Dpm'),
-			),
-			'#required' 		=> FALSE,
-	);
-
-	$form['submit_button'] = array(
-			'#type' => 'submit',
-			'#value' => t('Check'),
-	);
-
-	return $form;
-}
-
-
-function dw_tools_configuration_submit($form, &$form_state) {
-  
-
-
-	if($form_state['values']['display_track_1'] == '1'){
-		variable_set('djikweb_variables','1');
-	} else {
-		variable_set('djikweb_variables','0');
-	}
-	
-	if($form_state['values']['display_track_2'] == '1'){
-		variable_set('djikweb_track_editor','1');
-	} else {
-		variable_set('djikweb_track_editor','0');
-	}
+  if(strtoupper($form_state['input']['field_login']) != 'ROOT'){
+    $txt .= 'use '.strtoupper($form_state['input']['field_bdd']).';'."\n";
+    $txt .= "GRANT ALL PRIVILEGES ON ".$form_state['input']['field_bdd'].".* TO '".$form_state['input']['field_login']."'@'localhost' IDENTIFIED BY '".$form_state['input']['field_passwd']."' WITH GRANT OPTION;"."\n";
+    $txt .= 'FLUSH PRIVILEGES;'."\n";
+  }
+  dsm($txt);
 }
 
 

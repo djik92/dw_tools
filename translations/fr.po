@@ -1,6 +1,6 @@
 # $Id$
 #
-# LANGUAGE translation of Drupal (general)
+# French translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
 #  dw_tools.drush.inc: n/a
@@ -12,137 +12,84 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2015-03-19 15:50+0100\n"
-"PO-Revision-Date: 2015-03-19 16:00+0100\n"
+"POT-Creation-Date: 2015-06-26 15:57+0200\n"
+"PO-Revision-Date: 2015-06-26 15:58+0100\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language-Team: French <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+"Language: fr\n"
 "X-Generator: Poedit 1.7.5\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 
-#: dw_tools.drush.inc:38
+#: dw_tools.drush.inc:44
 msgid "Prefixed 'field_deleted_data_' tables are deleted"
 msgstr "Les tables prefixees 'field_deleted_data_' sont supprimees"
 
-#: dw_tools.drush.inc:50
+#: dw_tools.drush.inc:56
 msgid "Prefixed 'field_deleted_revision_' tables are deleted"
 msgstr "Les tables prefixees  'field_deleted_revision_' sont supprimees"
 
-#: dw_tools.drush.inc:58
+#: dw_tools.drush.inc:64
 msgid "The lines of the table 'field_config' where  deleted = 1 was deleted"
 msgstr "Les lignes de la table 'field_config' ou deleted=1 sont supprimees"
 
-#: dw_tools.drush.inc:65
+#: dw_tools.drush.inc:71
 msgid "The lines of the table 'field_config_instance' where  deleted = 1 was deleted"
 msgstr "Les lignes de la table 'field_config_instance' ou deleted=1 sont supprimees"
 
-#: dw_tools.pages.inc:87
-msgid "Variables Display"
-msgstr "Afficher les variables"
-
-#: dw_tools.pages.inc:90;144 dw_tools.module:201
-msgid "No"
-msgstr "Non"
-
-#: dw_tools.pages.inc:91;145 dw_tools.module:202
-msgid "Yes"
-msgstr "Oui"
-
-#: dw_tools.pages.inc:98
-msgid "Save configuration"
-msgstr "Sauvegarder la configuration"
-
-#: dw_tools.pages.inc:141
-msgid "Variable Display Tracking"
-msgstr "Affichage les varibles de tracking"
-
-#: dw_tools.pages.inc:152
-msgid "Display choice"
-msgstr "Choix d'affichage"
-
-#: dw_tools.pages.inc:155
-msgid "Text"
-msgstr "Texte"
-
-#: dw_tools.pages.inc:156
-msgid "Dpm"
-msgstr "Dpm"
-
-#: dw_tools.pages.inc:163 dw_tools.module:209
-msgid "Check"
-msgstr "Valider"
-
-#: dw_tools.module:15
-msgid "Blank page"
-msgstr "Page vierge"
-
-#: dw_tools.module:16
-msgid "Blank page to test methods"
-msgstr "Page vierge pour tester les méthodes"
-
-#: dw_tools.module:25
-msgid "Clear cache"
-msgstr "Clear Cache"
-
-#: dw_tools.module:46
-msgid "Execute PHP Code"
-msgstr "Executer du code PHP"
-
-#: dw_tools.module:47
-msgid "Execute some PHP code"
-msgstr "Executer du code PHP"
-
-#: dw_tools.module:67
-msgid "PHPinfo"
-msgstr "phpinfo()"
-
-#: dw_tools.module:68
-msgid "View your server's PHP configuration"
-msgstr "Voir la configuration du serveur PHP"
-
-#: dw_tools.module:107
-msgid "Creation script generator of database"
-msgstr "Générer un script de création de Base de données"
-
-#: dw_tools.module:119
-msgid "View Specs nodes"
-msgstr "Afficher les spécifications du noeud"
-
-#: dw_tools.module:138
-msgid "Login"
-msgstr "Login"
-
-#: dw_tools.module:148
+#: dw_tools.pages.inc:14;83
 msgid "Password"
 msgstr "Mot de passe"
 
-#: dw_tools.module:158
+#: dw_tools.pages.inc:24;114
+msgid "Check"
+msgstr "Valider"
+
+#: dw_tools.pages.inc:73
+msgid "Login"
+msgstr "Login"
+
+#: dw_tools.pages.inc:93
 msgid "Database Name"
 msgstr "Nom de la Base"
 
-#: dw_tools.module:198
+#: dw_tools.pages.inc:103
 msgid "You want to remove the database (if exists) ?"
 msgstr "Voulez vous supprimer la base (si elle existe) ?"
 
-#: dw_tools.install:18 dw_tools.info:0
+#: dw_tools.pages.inc:106
+msgid "No"
+msgstr "Non"
+
+#: dw_tools.pages.inc:107
+msgid "Yes"
+msgstr "Oui"
+
+#: dw_tools.module:13
+msgid "Blank page"
+msgstr "Page vierge"
+
+#: dw_tools.module:14
+msgid "Blank page to test methods"
+msgstr "Page vierge pour tester les méthodes"
+
+#: dw_tools.module:24
+msgid "Creation script generator of database"
+msgstr "Générer un script de création de Base de données"
+
+#: dw_tools.module:35
+msgid "Crypt a password"
+msgstr "Crypte un mot de passe"
+
+#: dw_tools.install:20 dw_tools.info:0
 msgid "Djikweb"
 msgstr "Djikweb"
 
-#: dw_tools.install:19
+#: dw_tools.install:21
 msgid "Develop relevant link"
 msgstr "Develop relevant link"
-
-#: dw_tools.install:25
-msgid "Djikweb Admin"
-msgstr "Djikweb Admin"
-
-#: dw_tools.install:26
-msgid "Dw Tools Administration Module"
-msgstr "Module d'administration de DW Tools"
 
 #: dw_tools.info:0
 msgid "DW Tools"

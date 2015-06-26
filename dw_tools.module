@@ -1,8 +1,4 @@
 <?php
-require_once 'dw_tools.pages.inc';
-require_once 'dw_tools.lib.inc';
-require_once 'dw_tools.testing.inc';
-
 
 /**
  * Implements hook_menu().
@@ -13,34 +9,25 @@ function dw_tools_menu() {
 	
 	variable_set('djikweb_variables','0');	
 	
-	$items['djikweb/testing/page'] = array(
+	$items['admin/config/development/djikweb/page'] = array(
   		'title' 				=> t('Blank page'),
   		'description' 			=> t('Blank page to test methods'),
     	'page callback' 		=> 'dw_tools_testing_page',
     	'access arguments' 		=> array('administer content types'),
   		'file' 					=> 'dw_tools.pages.inc',
   		'menu_name' 			=> 'djikweb',
+	    'type' => MENU_NORMAL_ITEM,
   		'weight'				=> 0,
   	);
-	
-	$items['djikweb/devel/cache/clear'] = array(
-		'title' 				=> t('Clear cache'),
-		'page callback' 		=> 'devel_cache_clear',
-		'description' 			=> '',
-		'access arguments' 		=> array('access devel information'),
-		'file' 					=> 'devel.pages.inc',
-		'file path' 			=> drupal_get_path('module', 'devel'),
-		'menu_name' 			=> 'djikweb',
-		'weight'				=> 1,
-	);
-	
+		
 	$items['djikweb/generate/install/mysql'] = array(
 	  		'title' 				=> t('Creation script generator of database'),
 	  		'description' 			=> '',
 	  		'page callback' 		=> 'drupal_get_form',
 	  		'page arguments' 		=> array('dw_tools_generate_install_mysql'),
 	  		'access callback' 		=> TRUE,
-	  		'menu_name' 			=> 'djikweb_admin',
+	  		'menu_name' 			=> 'djikweb',
+	        'file' 					=> 'dw_tools.pages.inc',
 	  		'weight'				=> 2,
 	);
 	
@@ -50,268 +37,13 @@ function dw_tools_menu() {
 	    'page callback' 		=> 'drupal_get_form', 
 	    'page arguments' 		=> array('dw_tools_generate_password'),
 	    'access callback' 		=> TRUE,
-	    'menu_name' 			=> 'djikweb_admin',
+	    'menu_name' 			=> 'djikweb',
+	    'file' 					=> 'dw_tools.pages.inc',
 	    'weight'				=> 3,
 	);
-	
 
-	$items['djikweb/devel/php'] = array(
-		'title' 				=> t('Execute PHP Code'),
-		'description' 			=> t('Execute some PHP code'),
-		'page callback' 		=> 'drupal_get_form',
-		'page arguments' 		=> array('devel_execute_form'),
-		'access arguments' 		=> array('execute php code'),
-		'file' 					=> 'devel.pages.inc',
-		'file path' 			=> drupal_get_path('module', 'devel'),
-		'menu_name' 			=> 'djikweb',
-		'weight'				=> 4,
-	);
-
-	
-	$items['djikweb/devel/phpinfo'] = array(
-		'title' 				=> t('PHPinfo'),
-		'description' 			=> t('View your server\'s PHP configuration'),
-		'page callback' 		=> 'devel_phpinfo',
-		'access arguments' 		=> array('access devel information'),
-		'file' 					=> 'devel.pages.inc',
-		'file path' 			=> drupal_get_path('module', 'devel'),
-		'menu_name' 			=> 'djikweb',
-		'weight'				=> 5,
-	);
-
-	
-  
- 	
- 	
- 	
- 	
- 	
-  
-  	//ADMIN
-  
-  	$items['djikweb/configuration/configuration'] = array(
-  		'title' 				=> t('View Specs nodes'),
-  	    'description'           => '',
-  		'page callback' 		=> 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
-  		'page arguments' 		=> array('dw_tools_configuration'), //put the name of the form here
-  		'file' 					=> 'dw_tools.pages.inc',
-  		'access callback' 		=> TRUE,
-  		'menu_name' 			=> 'djikweb_admin',
-  	);
-  	
-  	
-     
   	return $items;
 }
 
-/*function dw_tools_menu_alter(&$items){
-  
-	$items['djikweb/devel/phpinfo']['access callback'] = FALSE;
-}*/
 
-
-/**
- * Comment cacher des liens du menu ?
- * @author djik
- * @param unknown $item
- * @param unknown $menu
- */
-function dw_tools_menu_link_alter(&$item, $menu){
-  
-if ($item['link_path'] == 'djikweb/devel/phpinfo') {
-    $item['hidden'] = 0;
-  };
-  
-  
-}
-
-function dw_tools_generate_install_mysql($form, &$form_state) {
-	$form['field_login'] = array(
-		'#type' 				=> 'textfield',
-		'#title' 				=> t('Login'),
-		'#default_value' 		=> '',
-		'#size' 				=> 60,
-		'#maxlength' 			=> 128,
-		'#required' 			=> TRUE,
-		
-	);
-	
-	$form['field_passwd'] = array(
-		'#type' 				=> 'password',
-		'#title' 				=> t('Password'),
-		'#maxlength' 			=> 64,
-		'#size' 				=> 30,
-		'#maxlength' 			=> 128,
-		'#required' 			=> FALSE,
-			
-	);
-	
-	$form['field_bdd'] = array(
-		'#type' 				=> 'textfield',
-		'#title' 				=> t('Database Name'),
-		'#default_value' 		=> '',
-		'#size' 				=> 60,
-		'#maxlength' 			=> 128,
-		'#required' 			=> TRUE,
-	
-	);
-	/*
-	$form['field_ip'] = array(
-		'#type' 				=> 'textfield',
-		'#title' 				=> t('HOST FTP'),
-		'#default_value' 		=> '',
-		'#size' 				=> 60,
-		'#maxlength' 			=> 128,
-		'#required' 			=> TRUE,
-	
-	);
-	
-	$form['field_login_ip'] = array(
-		'#type' 				=> 'textfield',
-		'#title' 				=> t('Login FTP'),
-		'#default_value' 		=> '',
-		'#size' 				=> 60,
-		'#maxlength' 			=> 128,
-		'#required' 			=> TRUE,
-	
-	);
-	
-	$form['field_passwd_ip'] = array(
-		'#type' 				=> 'password',
-		'#title' 				=> t('Password FTP'),
-		'#maxlength' 			=> 64,
-		'#size' 				=> 30,
-		'#maxlength' 			=> 128,
-		'#required' 			=> TRUE,
-				
-	);*/
-	
-	$form['del_bdd'] = array(
-			'#type' 			=> 'radios',
-			'#title' 			=> t('You want to remove the database (if exists) ?'),
-			'#default_value' 	=> 0,
-			'#options' 			=> array(
-					0 	=> t('No'),
-					1 	=> t('Yes'),
-			),
-			'#required' 		=> TRUE,
-	);
-	
-	$form['submit_button'] = array(
-		'#type' 				=> 'submit',
-		'#value' 				=> t('Check'),
-	);
-	
-	
-	
-	return $form;
-}
-
-
-
-
-function dw_tools_generate_install_mysql_submit($form, &$form_state) {
-	//print_nice(menu_tree_page_data('djikweb'),10);die();
-	
-	/*menu_set_active_item('djikweb/devel/phpinfo');
-	menu_rebuild();
-	*/
-	//variable_get('djikweb_mysql_login')
-	$txt = '';
-	
-	if($form_state['input']['del_bdd']){
-		$txt .= 'DROP DATABASE IF EXISTS '.strtoupper($form_state['input']['field_bdd']).';'."\n";
-	}
-	$txt .= 'CREATE DATABASE IF NOT EXISTS '.strtoupper($form_state['input']['field_bdd']).';'."\n";
-	
-	if(strtoupper($form_state['input']['field_login']) != 'ROOT'){
-		$txt .= 'use '.strtoupper($form_state['input']['field_bdd']).';'."\n";
-		$txt .= "GRANT ALL PRIVILEGES ON ".$form_state['input']['field_bdd'].".* TO '".$form_state['input']['field_login']."'@'localhost' IDENTIFIED BY '".$form_state['input']['field_passwd']."' WITH GRANT OPTION;"."\n";
-		$txt .= 'FLUSH PRIVILEGES;'."\n";
-	}
-	
-	drupal_set_message($txt, 'status', FALSE);
-	dsm($txt);
-}
-
-
-function dw_tools_generate_password($form, &$form_state) {
- 
-  $form['passwd'] = array(
-      '#type' 				=> 'textfield',
-      '#title' 				=> t('Password'),
-      '#default_value' 		=> '',
-      '#size' 				=> 60,
-      '#maxlength' 			=> 128,
-      '#required' 			=> TRUE,
-  
-  );
-  
-  $form['submit_button'] = array(
-      '#type' 				=> 'submit',
-      '#value' 				=> t('Check'),
-  );
-  
-  return $form;
-  
-}
-
-
-function dw_tools_generate_password_submit($form, &$form_state) {
-  
-
-
-  require_once getcwd().'/includes/password.inc';
-  require_once getcwd().'/includes/bootstrap.inc';
- 
-  
- $hash_pass =  user_hash_password($form_state['input']['passwd'],11);
- drupal_set_message($hash_pass, 'status', FALSE);
- 
- $txt = 'UPDATE users SET pass='.$hash_pass.' WHERE uid=1;';
- drupal_set_message($txt, 'status', FALSE);
-}
-
-
-
-/**
- * Implement hook_preprocess()
- * @param unknown $variables
- * @param unknown $hook
- * @author djik
- * @return NULL
- */
-function dw_tools_preprocess(&$variables, $hook){
-	
-	if(variable_get('djikweb_variables')){
-		if(array_key_exists('node',$variables)){
-			$node = $variables['node'];
-			if(isset($node)){
-				if(variable_get('djikweb_track_editor')){
-					dpm('Le nid du node courant : '.$node->nid);
-					dpm('Le type du node courant : '.$node->type);
-				} else {
-					echo 'Le nid du node courant : <strong>'.$node->nid.'</strong>';
-					echo '<br />';
-					echo 'Le type du node courant : <strong>'.$node->type.'</strong>';
-				}
-				
-					
-			}
-		}
-	}
-}
-
-
-
-function dw_tools_help($path, $arg){
-  switch ($path) {
-    case 'admin/help#dw_tools':
-      return 'test';
-    case 'djikweb/generate/install/mysql':
-      return '<p style="background-color:#FFFF80;">' . t('test.') . '</p>';
-      
-  }
-      
-}
 

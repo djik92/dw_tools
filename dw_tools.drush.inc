@@ -11,7 +11,7 @@ function dw_tools_drush_command() {
 	$items['dw-tools-clear-table-deleted'] = array(
 			'description' 		=> dt('To purge the data archived by Drupal.'),
 			'aliases' 			=> array('dw-clear'),
-			//'bootstrap' 		=> DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
+		
 	);
 	
 	$items['dw-tools-truncate-table-cache'] = array(
@@ -24,16 +24,15 @@ function dw_tools_drush_command() {
 	return $items;
 }
 
-
-
 /**
- * Fonction qui est executer lors de l'appel de drush cfib
+ * Function executed with drush dw-clear command
+ * @link dw-tools-clear-table-deleted
+ * @uses drush dw-clear
  * @author djik
  * @return NULL
  */
 function drush_dw_tools_clear_table_deleted() {
- 
-  
+   
   //Suppression des tables field_deleted_data_%
   $result = db_query("SELECT CONCAT( 'DROP TABLE IF EXISTS ', table_name , '' )
     AS statement FROM information_schema.tables
@@ -76,7 +75,11 @@ function drush_dw_tools_clear_table_deleted() {
 }
 
 /**
- * Fonction qui permet de supprimer tous les caches a la volée
+ * Function executed with drush ccc command
+ * @link dw-tools-truncate-table-cache
+ * @uses drush ccc
+ * @author djik
+ * @return NULL
  */
 function drush_dw_tools_truncate_table_cache(){
  

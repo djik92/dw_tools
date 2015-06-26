@@ -3,15 +3,15 @@ package = Djikweb
 description = Module with tools for the development and display
 core = 7.x
 
-version = 7.x-1.4
+version = 7.x-2.0
 
 dependencies[] = devel
+dependencies[] = search_krumo
 dependencies[] = module_filter
 dependencies[] = admin_menu
-
-
-
-
+dependencies[] = features_diff
+dependencies[] = features
+dependencies[] = strongarm
 
 files[] = dw_tools.install
 files[] = dw_tools.module
@@ -19,7 +19,6 @@ files[] = dw_tools.drush.inc
 files[] = dw_tools.test
 files[] = dw_tools.lib.inc
 files[] = dw_tools.pages.inc
-files[] = dw_tools.testing.inc
-files[] = dw_tools.rules_defaults.inc
+
 
 
