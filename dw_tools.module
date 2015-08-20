@@ -6,44 +6,85 @@
  * @return array
  */
 function dw_tools_menu() {
-	
-	variable_set('djikweb_variables','0');	
-	
-	$items['admin/config/development/djikweb/page'] = array(
-  		'title' 				=> t('Blank page'),
-  		'description' 			=> t('Blank page to test methods'),
-    	'page callback' 		=> 'dw_tools_testing_page',
-    	'access arguments' 		=> array('administer content types'),
-  		'file' 					=> 'dw_tools.pages.inc',
-  		'menu_name' 			=> 'djikweb',
-	    'type' => MENU_NORMAL_ITEM,
-  		'weight'				=> 0,
-  	);
-		
-	$items['djikweb/generate/install/mysql'] = array(
-	  		'title' 				=> t('Creation script generator of database'),
-	  		'description' 			=> '',
-	  		'page callback' 		=> 'drupal_get_form',
-	  		'page arguments' 		=> array('dw_tools_generate_install_mysql'),
-	  		'access callback' 		=> TRUE,
-	  		'menu_name' 			=> 'djikweb',
-	        'file' 					=> 'dw_tools.pages.inc',
-	  		'weight'				=> 2,
-	);
-	
-	$items['djikweb/generate/password'] = array(
-	    'title' 				=> t('Crypt a password'),
-	    'description' 			=> '',
-	    'page callback' 		=> 'drupal_get_form', 
-	    'page arguments' 		=> array('dw_tools_generate_password'),
-	    'access callback' 		=> TRUE,
-	    'menu_name' 			=> 'djikweb',
-	    'file' 					=> 'dw_tools.pages.inc',
-	    'weight'				=> 3,
-	);
 
-  	return $items;
+
+  $items['admin/config/djikweb'] = array(
+    'title' => 'DW module settings',
+    'description' => 'This is the page for dw module settings for the site.',
+    'position' => 'right',
+    'weight' => -5,
+    'access arguments' => array('access administration pages'),
+    'page callback' => 'system_admin_menu_block_page',
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
+  /*$items['admin/config/djikweb/mysql'] = array(
+    'title' => t('Creation script generator of database'),
+    'description' => '',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dw_tools_generate_install_mysql'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'dw_tools.pages.inc',
+    'weight' => 1,
+  );*/
+
+  $items['admin/config/djikweb/password'] = array(
+    'title' => t('Crypt a password'),
+    'description' => '',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dw_tools_generate_password'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'dw_tools.pages.inc',
+    'weight' => 2,
+  );
+
+  $items['admin/config/djikweb/cmd-line-archive'] = array(
+    'title' => t('Generate cmd line archive'),
+    'description' => '',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dw_tools_generate_cmd_line_archive'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'dw_tools.pages.inc',
+    'weight' => 3,
+  );
+
+  $items['admin/config/djikweb/devel'] = array(
+    'title' => 'Execute PHP Code',
+    'description' => 'Execute some PHP code',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dw_tools_devel_execute_form'),
+    'access arguments' => array('execute php code'),
+    'file' => 'dw_tools.pages.inc',
+    'weight' => 4,
+  );
+
+  $items['admin/config/djikweb/page'] = array(
+    'title' => t('Blank page'),
+    'description' => t('Blank page to test methods'),
+    'page callback' => 'dw_tools_testing_page',
+    'access arguments' => array('administer content types'),
+    'file' => 'dw_tools.pages.inc',
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => 5,
+  );
+
+
+  return $items;
 }
 
+/**
+ * Allow to use print_nice function without include the library
+ * @author djik
+ * @param $elem
+ * @return NULL
+ */
+function dw($elem) {
+  $max_level = 10;
+  module_load_include('inc', 'dw_tools', 'dw_tools.lib');
 
-
+  return print_nice($elem, $max_level);
+}

@@ -10,34 +10,7 @@
  * @return NULL
  */
 function dw_tools_enable() {
-	
 	module_disable(array('overlay','toolbar'),TRUE);
-		
-	// Create a custom menu, if Menu module is enabled.
-	if (module_exists('menu')) {
-		$menu = array(
-				'menu_name' 	=> 'djikweb',
-				'title' 		=> t('Djikweb'),
-				'description' 	=> t('Develop relevant link'),
-		);
-		menu_save($menu);
-	
-	}
-}
-
-/**
- * Implement hook_disable()
- * Disable djikweb menu
- * @author djik
- * @return NULL
- */
-function dw_tools_disable(){
-	if (module_exists('menu')) {
-		if ($devel_menu = menu_load('djikweb')) {
-			menu_delete($devel_menu);
-		}
-	}
-	
 }
 
 

@@ -57,7 +57,7 @@ function dw_tools_testing_page() {
   /**
    * Insert a code
    */
-  return 'page Test';
+  return t('This is page for test a code');
 }
 
 /**
@@ -67,6 +67,7 @@ function dw_tools_testing_page() {
  * @param $form_state
  * @return array
  */
+/*
 function dw_tools_generate_install_mysql($form, &$form_state) {
   $form['field_login'] = array(
       '#type' 				=> 'textfield',
@@ -81,7 +82,6 @@ function dw_tools_generate_install_mysql($form, &$form_state) {
   $form['field_passwd'] = array(
       '#type' 				=> 'password',
       '#title' 				=> t('Password'),
-      '#maxlength' 			=> 64,
       '#size' 				=> 30,
       '#maxlength' 			=> 128,
       '#required' 			=> FALSE,
@@ -116,13 +116,14 @@ function dw_tools_generate_install_mysql($form, &$form_state) {
 
   return $form;
 }
-
+*/
 /**
  * Form submit to generate a script Mysql
  * @param unknown $form
  * @param unknown $form_state
  * @return NULL
  */
+/*
 function dw_tools_generate_install_mysql_submit($form, &$form_state) {
  
   $txt = '';
@@ -139,6 +140,76 @@ function dw_tools_generate_install_mysql_submit($form, &$form_state) {
   }
   dsm($txt);
 }
+*/
+
+/**
+ * Allow to redirect to devel/php
+ * @author djik
+ * @param $form
+ * @param $form_state
+ */
+function dw_tools_devel_execute_form($form, &$form_state){
+
+  $form_state ['redirect'] = 'devel/php';
+  drupal_redirect_form($form_state);
+}
+
+/**
+ * Allow to generate a commande line for created a archive of list module
+ * @author djik
+ * @param $form
+ * @param $form_state
+ * @return $form
+ */
+function dw_tools_generate_cmd_line_archive($form, &$form_state){
+  $form['field_version'] = array(
+    '#type' 				=> 'textfield',
+    '#title' 				=> t('Version'),
+    '#maxlength' 			=> 20,
+    '#size' 				=> 30,
+    '#required' 			=> TRUE,
+  );
+
+  $form['field_prefix'] = array(
+    '#type' 				=> 'textfield',
+    '#title' 				=> t('Module Name'),
+    '#default_value' 		=> '',
+    '#size' 				=> 60,
+    '#maxlength' 			=> 128,
+    '#required' 			=> TRUE,
+
+  );
+
+  $form['submit_button'] = array(
+    '#type' 				=> 'submit',
+    '#value' 				=> t('Check'),
+  );
+
+  return $form;
+}
+
+/**
+ * Allow to generate a commande line for created a archive of list module
+ * @author djik
+ * @param $form
+ * @param $form_state
+ */
+function dw_tools_generate_cmd_line_archive_submit($form, &$form_state){
+
+  $cmd_array = array();
+
+  foreach(module_list() as $v){
+    if(!is_bool(strpos($v, $form_state['input']['field_prefix']))){
+      $cmd_array[] = 'tar cvfz '.$v.'-'.$form_state['input']['field_version'].'.tar.gz  '.$v.'/';
+      $cmd_array[] = 'zip -r '.$v.'-'.$form_state['input']['field_version'].'.zip '.$v.'/';
+    }
+
+  }
+  $txt = implode(' && ',$cmd_array);
+
+}
+
+
 
 
 
